@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import './screen/about.dart';
+import './screen/basket.dart';
+//bottom nav
+import './bottomNav/Home.dart';
+import './bottomNav/History.dart';
+import './bottomNav/Search.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,6 +18,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      routes: {
+        'about': (context) => About(),
+        'basket': (context) => Basket(),
+      },
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -54,8 +63,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Runes myEmoji = Runes('\u{1f607}');
   Runes myEmoji2 = Runes('\u{1f607}');
   Runes myEmojAngry = Runes('\u{1F92C}');
-
   String emo = '';
+  final List<Widget> screens = [const Home(), const Search(), const History()];
+  final List<String> title = ['Home', 'Screen', 'History'];
+  int currentIndexx = 0;
   void _incrementCounter() {
     //refresh page
     setState(() {
@@ -100,10 +111,11 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    List list = [3, 4, 5, 3, 2];
-    list.forEach((filter) {
-      print(filter);
-    });
+    // List list = [3, 4, 5, 3, 2];
+    // list.forEach((filter) {
+    //   print(filter);
+    // });
+
     var sideDrawerBar = Drawer(
       elevation: 16.0,
       child: Column(
@@ -118,90 +130,94 @@ class _MyHomePageState extends State<MyHomePage> {
             leading: new Icon(Icons.inbox),
           ),
           ListTile(
-            title: new Text("My Basket  "),
-            leading: new Icon(Icons.shopping_basket),
-          ),
+              title: new Text("My Basket  "),
+              leading: new Icon(Icons.shopping_basket),
+              onTap: () {
+                Navigator.pushNamed(context, 'basket');
+              }),
           ListTile(
               title: Text("About"),
               leading: Icon(Icons.help),
               onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => About()));
+                Navigator.pushNamed(context, 'about');
               })
         ],
       ),
     );
+
     return Scaffold(
         drawer: sideDrawerBar,
         appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
-          title: Text(widget.title),
+          title: Text(title[currentIndexx]),
         ),
-        body: Center(
-          // Center is a layout widget. It takes a single child and positions it
-          // in the middle of the parent.
+        // body: Center(
+        //   // Center is a layout widget. It takes a single child and positions it
+        //   // in the middle of the parent.
 
-          child: Column(
-            // Column is also a layout widget. It takes a list of children and
-            // arranges them vertically. By default, it sizes itself to fit its
-            // children horizontally, and tries to be as tall as its parent.
-            //
-            // Invoke "debug painting" (press "p" in the console, choose the
-            // "Toggle Debug Paint" action from the Flutter Inspector in Android
-            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-            // to see the wireframe for each widget.
-            //
-            // Column has various properties to control how it sizes itself and
-            // how it positions its children. Here we use mainAxisAlignment to
-            // center the children vertically; the main axis here is the vertical
-            // axis because Columns are vertical (the cross axis would be
-            // horizontal).
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              contohFungsi(),
-              const Text(
-                'You have pushed the button this many times:',
-              ),
-              Text(
-                String.fromCharCodes(myEmoji),
-                style: const TextStyle(fontSize: 48),
-              ),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-              Text(
-                emo,
-                style: Theme.of(context).textTheme.headline4,
-              ),
-              // ignore: prefer_const_literals_to_create_immutables
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Text(
-                    "Satu",
-                    style: TextStyle(fontSize: _ukuran),
-                  ),
-                  Text("Satu"),
-                  Text("Satu"),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  TextButton(onPressed: () {}, child: const Text('Flag')),
-                  TextButton(
-                    onPressed: _ukuransAdd,
-                    child: const Icon(Icons.flag),
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.pink,
-                    ),
-                  )
-                ],
-              ),
-            ],
-          ),
-        ),
+        //   child: Column(
+        //     // Column is also a layout widget. It takes a list of children and
+        //     // arranges them vertically. By default, it sizes itself to fit its
+        //     // children horizontally, and tries to be as tall as its parent.
+        //     //
+        //     // Invoke "debug painting" (press "p" in the console, choose the
+        //     // "Toggle Debug Paint" action from the Flutter Inspector in Android
+        //     // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+        //     // to see the wireframe for each widget.
+        //     //
+        //     // Column has various properties to control how it sizes itself and
+        //     // how it positions its children. Here we use mainAxisAlignment to
+        //     // center the children vertically; the main axis here is the vertical
+        //     // axis because Columns are vertical (the cross axis would be
+        //     // horizontal).
+        //     mainAxisAlignment: MainAxisAlignment.center,
+        //     children: <Widget>[
+        //       contohFungsi(),
+        //       const Text(
+        //         'You have pushed the button this many times:',
+        //       ),
+        //       Text(
+        //         String.fromCharCodes(myEmoji),
+        //         style: const TextStyle(fontSize: 48),
+        //       ),
+        //       Text(
+        //         '$_counter',
+        //         style: Theme.of(context).textTheme.headline4,
+        //       ),
+        //       Text(
+        //         emo,
+        //         style: Theme.of(context).textTheme.headline4,
+        //       ),
+        //       // ignore: prefer_const_literals_to_create_immutables
+        //       Row(
+        //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //         children: <Widget>[
+        //           Text(
+        //             "Satu",
+        //             style: TextStyle(fontSize: _ukuran),
+        //           ),
+        //           Text("Satu"),
+        //           Text("Satu"),
+        //         ],
+        //       ),
+        //       Row(
+        //         children: <Widget>[
+        //           TextButton(onPressed: () {}, child: const Text('Flag')),
+        //           TextButton(
+        //             onPressed: _ukuransAdd,
+        //             child: const Icon(Icons.flag),
+        //             style: TextButton.styleFrom(
+        //               foregroundColor: Colors.pink,
+        //             ),
+        //           )
+        //         ],
+        //       ),
+        //     ],
+        //   ),
+        // ),
+
+        body: screens[currentIndexx],
         floatingActionButton: FloatingActionButton(
           onPressed: _incrementCounter,
           tooltip: 'Increment',
@@ -218,25 +234,30 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
         bottomNavigationBar: BottomNavigationBar(
-          currentIndex: 0,
+          currentIndex: currentIndexx,
+          onTap: (int index) {
+            setState(() {
+              currentIndexx = index;
+              // print(currentIndexx);
+              print(currentIndexx);
+            });
+          },
           fixedColor: Colors.teal,
+          // ignore: prefer_const_literals_to_create_immutables
           items: [
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               label: "Home",
               icon: Icon(Icons.home),
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               label: "Search",
               icon: Icon(Icons.search),
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               label: "History",
               icon: Icon(Icons.history),
             ),
           ],
-          onTap: (int index) {
-            setState(() {});
-          },
         )
 
         // This trailing comma makes auto-formatting nicer for build methods.
