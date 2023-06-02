@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import './itemBasket.dart';
+import './studentDetail.dart';
 
-class Basket extends StatelessWidget {
-  const Basket({super.key});
+class Student extends StatelessWidget {
+  const Student({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,19 +11,19 @@ class Basket extends StatelessWidget {
           title: Text('About'),
         ),
         body: Column(children: [
-          Text("This is Basket "),
+          Text("This is Student "),
           ElevatedButton(
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ItemBasket(1, 11)));
+                    MaterialPageRoute(builder: (context) => studentID(1)));
               },
-              child: Text("Item 1")),
+              child: Text("Student 1")),
           ElevatedButton(
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ItemBasket(2, 14)));
+                    MaterialPageRoute(builder: (context) => studentID(2)));
               },
-              child: Text("Item 2"))
+              child: Text("Student 2"))
         ]));
   }
 }
