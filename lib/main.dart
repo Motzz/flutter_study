@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './screen/about.dart';
 import './screen/student.dart';
 import './screen/basket.dart';
+import './screen/resep.dart';
 
 //bottom nav
 import './bottomNav/Home.dart';
@@ -21,9 +22,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       routes: {
-        'about': (context) => About(),
+        'about': (context) => const About(),
         'basket': (context) => Basket(),
         'student': (context) => Student(),
+        'resep': (context) => Resep()
       },
       theme: ThemeData(
         // This is the theme of your application.
@@ -149,6 +151,12 @@ class _MyHomePageState extends State<MyHomePage> {
               leading: Icon(Icons.help),
               onTap: () {
                 Navigator.pushNamed(context, 'student');
+              }),
+          ListTile(
+              title: Text("Resep"),
+              leading: Icon(Icons.help),
+              onTap: () {
+                Navigator.pushNamed(context, 'resep');
               })
         ],
       ),
