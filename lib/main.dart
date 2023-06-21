@@ -3,7 +3,7 @@ import './screen/about.dart';
 import './screen/student.dart';
 import './screen/basket.dart';
 import './screen/resep.dart';
-
+import './screen/kuis.dart';
 //bottom nav
 import './bottomNav/Home.dart';
 import './bottomNav/History.dart';
@@ -25,7 +25,8 @@ class MyApp extends StatelessWidget {
         'about': (context) => const About(),
         'basket': (context) => Basket(),
         'student': (context) => Student(),
-        'resep': (context) => Resep()
+        'resep': (context) => Resep(),
+        'kuis': (context) => Kuis()
       },
       theme: ThemeData(
         // This is the theme of your application.
@@ -157,6 +158,12 @@ class _MyHomePageState extends State<MyHomePage> {
               leading: Icon(Icons.help),
               onTap: () {
                 Navigator.pushNamed(context, 'resep');
+              }),
+          ListTile(
+              title: Text("Kuis"),
+              leading: Icon(Icons.help),
+              onTap: () {
+                Navigator.pushNamed(context, 'kuis');
               })
         ],
       ),
